@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2",
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
