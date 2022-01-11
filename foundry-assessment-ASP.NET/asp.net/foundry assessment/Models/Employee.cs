@@ -14,16 +14,11 @@ namespace foundry_assessment.Models
         [Required, Display(Name = "Employee Name")]
         public string EmployeeName { get; set; }
 
-        [Required, Display(Name = "Current Engagement")]
-        public string CurrentEngagmentID { get; set; }
+        [Required, Display(Name = "Engagement ID")]
+        public string EngagmentID { get; set; }
 
-        [Required, Display(Name = "Current Engagement")]
-        public string CurrentEngagmentName { get; set; }
+        [Required, Display(Name = "Engagement Name")]
+        public string EngagmentName { get; set; }
 
-        [Required, Display(Name = "Current Client")]
-        public string CurrentClientID { get; set; }
-
-        [Required, Display(Name = "Current Client")]
-        public string CurrentClientName { get; set; }
     }
 }

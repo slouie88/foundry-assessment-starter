@@ -16,5 +16,11 @@ namespace foundry_assessment.Models
 
         [Display(Name = "Client's Priority Ranking")]
         public int Priority { get; set; }
+
+        [Required, Display(Name = "Engagement ID")]
+        public string EngagmentID { get; set; }
+
+        [Required, Display(Name = "Engagement Name")]
+        public string EngagmentName { get; set; }
     }
 }
