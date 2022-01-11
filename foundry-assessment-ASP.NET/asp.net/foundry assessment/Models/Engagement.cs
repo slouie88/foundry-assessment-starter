@@ -17,5 +17,8 @@ namespace foundry_assessment.Models
         [Required, Display(Name = "Engagement Description")]
         public string EngagementDescription { get; set; }
 
+        [Display(Name = "Engagement's Priority Ranking")]
+        public int Priority { get; set; }
+
     }
 }

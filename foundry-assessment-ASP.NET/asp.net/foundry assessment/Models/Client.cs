@@ -14,7 +14,7 @@ namespace foundry_assessment.Models
         [Required, Display(Name = "Client Name")]
         public string ClientName { get; set; }
 
-        [Display(Name = "Priority Ranking")]
-        public string Priority { get; set; }
+        [Display(Name = "Client's Priority Ranking")]
+        public int Priority { get; set; }
     }
 }
