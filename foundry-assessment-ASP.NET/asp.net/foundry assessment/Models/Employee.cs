@@ -8,17 +8,12 @@ namespace foundry_assessment.Models
 {
     public class Employee
     {
-        [Required, Display(Name ="Employee ID")]
+        [Key, Required, Display(Name ="id")]
         public int EmployeeID { get; set; }
 
-        [Required, Display(Name = "Employee Name")]
+        [Required, Display(Name = "name")]
         public string EmployeeName { get; set; }
 
-        [Required, Display(Name = "Engagement ID")]
-        public string EngagmentID { get; set; }
-
-        [Required, Display(Name = "Engagement Name")]
-        public string EngagmentName { get; set; }
 
     }
 }

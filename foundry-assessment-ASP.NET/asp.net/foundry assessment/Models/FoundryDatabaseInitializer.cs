@@ -17,17 +17,26 @@ namespace foundry_assessment.Models
 
         private static List<Employee> GetEmployees()
         {
-            throw new NotImplementedException();
+            var employees = new List<Employee> { new Employee { EmployeeID = 1, EmployeeName = "test" } };
+            return employees;
         }
 
         private static List<Client> GetClients()
         {
-            throw new NotImplementedException();
+            var clients = new List<Client> { new Client { ClientID = 1, ClientName = "test" } };
+            return clients;
         }
 
         private static List<Engagement> GetEngagements()
         {
-            throw new NotImplementedException();
+            var engagements = new List<Engagement> { new Engagement { EngagementID = 1, 
+                EngagementName = "test", 
+                EngagementDescription = "", 
+                Started =  new DateTime(2022, 01, 12), 
+                Ended = new DateTime(2022, 01, 12) , 
+                ClientID = 1, 
+                EmployeeID = 1} };
+            return engagements;
         }
     }
 }

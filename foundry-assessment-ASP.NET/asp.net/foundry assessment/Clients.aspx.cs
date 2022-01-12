@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace foundry_assessment
 {
-    public partial class Client : System.Web.UI.Page
+    public partial class Clients : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

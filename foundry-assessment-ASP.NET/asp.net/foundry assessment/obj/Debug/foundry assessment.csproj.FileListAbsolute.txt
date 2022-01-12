@@ -146,3 +146,7 @@ C:\Users\stefa\Source\Repos\foundry-assessment-starter\foundry-assessment-ASP.NE
 C:\Users\stefa\Source\Repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\obj\Debug\foundry assessment.csproj.CopyComplete
 C:\Users\stefa\Source\Repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\obj\Debug\foundry assessment.dll
 C:\Users\stefa\Source\Repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\obj\Debug\foundry assessment.pdb
+C:\Users\stefa\source\repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\bin\EntityFramework.dll
+C:\Users\stefa\source\repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\bin\EntityFramework.SqlServer.dll
+C:\Users\stefa\source\repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\bin\EntityFramework.xml
+C:\Users\stefa\source\repos\foundry-assessment-starter\foundry-assessment-ASP.NET\asp.net\foundry assessment\bin\EntityFramework.SqlServer.xml
