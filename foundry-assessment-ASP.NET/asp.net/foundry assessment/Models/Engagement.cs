@@ -29,10 +29,8 @@ namespace foundry_assessment.Models
         [Required, Display(Name = "id")]
         public int ClientID { get; set; }
 
+        public virtual Employee Employee { get; set; }
 
-/*        public List<Employee> Employees { get; set; }
-
-        public List<Client> Clients { get; set; }
-*/
+        public virtual Client Client { get; set; }
     }
 }

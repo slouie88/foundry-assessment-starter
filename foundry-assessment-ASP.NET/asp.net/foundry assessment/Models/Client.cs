@@ -13,5 +13,7 @@ namespace foundry_assessment.Models
         [Required, Display(Name = "name")]
         public string ClientName { get; set; }
 
+        public virtual ICollection<Engagement> Engagements { get; set; }
+
     }
 }

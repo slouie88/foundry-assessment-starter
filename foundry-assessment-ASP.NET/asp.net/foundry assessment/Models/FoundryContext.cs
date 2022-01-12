@@ -8,7 +8,7 @@ namespace foundry_assessment.Models
 {
     public class FoundryContext : DbContext
     {
-        public FoundryContext() : base("foundry_assessment")
+        public FoundryContext() : base("FoundryApp")
         {
 
         }
