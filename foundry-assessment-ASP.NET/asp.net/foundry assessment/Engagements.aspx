@@ -4,22 +4,22 @@
     <div class="row">
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Engagements">Add Engagements &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/AddEngagementPage">Add Engagements &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Engagements">Search Engagements &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/SearchEngagementPage">Search Engagements &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Engagements">Modify Engagements &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/ModifyEngagementPage">Modify Engagements &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Engagements">Remove Engagements &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/RemoveEngagementPage">Remove Engagements &raquo;</a>
             </p>
         </div>
     </div>

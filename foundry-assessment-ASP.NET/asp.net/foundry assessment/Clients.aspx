@@ -4,22 +4,22 @@
     <div class="row">
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Clients">Add Client &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/AddClientPage">Add Client &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Clients">Search Client &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/SearchClientPage">Search Client &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Clients">Modify Client &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/ModifyClientPage">Modify Client &raquo;</a>
             </p>
         </div>
         <div class="col-sm-3">
             <p>
-                <a class="btn btn-default" runat="server" href="~/Clients">Remove Client &raquo;</a>
+                <a class="btn btn-default" runat="server" href="~/RemoveClientPage">Remove Client &raquo;</a>
             </p>
         </div>
     </div>
