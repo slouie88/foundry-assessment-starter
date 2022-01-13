@@ -1,46 +1,44 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clients.aspx.cs" Inherits="foundry_assessment.Clients" %>
+﻿<%@ Page Title="" Async="true" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Clients.aspx.cs" Inherits="foundry_assessment.Clients" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <div class="row">
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/AddClientPage">Add Client &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/SearchClientPage">Search Client &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/ModifyClientPage">Modify Client &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/RemoveClientPage">Remove Client &raquo;</a>
-            </p>
-        </div>
-    </div>
-    <br />
-
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
+          <th scope="col">Client Id <br />
+              <asp:TextBox ID="clientID" runat="server" />
+          </th>
+          <th scope="col">Client Name <br />
+              <asp:TextBox ID="clientName" runat="server" />
+          </th>
+          <th scope="col">
+              <asp:Button ID="btnAdd" runat="server" Text="Add Client" />
+          </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>0</td>
-          <td>Test</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Test2</td>
-        </tr>
-      </tbody>
     </table>
+    <br />
+
+    <hr />
+    <asp:GridView ID="gvClients" runat="server" PageSize="3" AllowPaging="true"
+        Width="450">
+        <Columns>
+            <asp:TemplateField HeaderText="Client ID">
+                <ItemTemplate>
+                    <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("id") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Client Name">
+                <ItemTemplate>
+                    <asp:Label ID="lblClientName" runat="server" Text='<%# Eval("name") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtClientName" runat="server" Text='<%# Eval("name") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />
+        </Columns>
+    </asp:GridView>
 </asp:Content>

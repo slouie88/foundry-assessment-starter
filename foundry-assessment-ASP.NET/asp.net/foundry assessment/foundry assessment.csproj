@@ -57,6 +57,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -112,9 +113,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddClientPage.aspx" />
-    <Content Include="AddEmployeePage.aspx" />
-    <Content Include="AddEngagementPage.aspx" />
     <Content Include="Clients.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -136,12 +134,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="ModifyClientPage.aspx" />
-    <Content Include="ModifyEmployeePage.aspx" />
-    <Content Include="ModifyEngagementPage.aspx" />
-    <Content Include="RemoveClientPage.aspx" />
-    <Content Include="RemoveEmployeePage.aspx" />
-    <Content Include="RemoveEngagementPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -170,9 +162,6 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="SearchClientPage.aspx" />
-    <Content Include="SearchEmployeePage.aspx" />
-    <Content Include="SearchEngagementPage.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -180,27 +169,6 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddClientPage.aspx.cs">
-      <DependentUpon>AddClientPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddClientPage.aspx.designer.cs">
-      <DependentUpon>AddClientPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AddEmployeePage.aspx.cs">
-      <DependentUpon>AddEmployeePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddEmployeePage.aspx.designer.cs">
-      <DependentUpon>AddEmployeePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AddEngagementPage.aspx.cs">
-      <DependentUpon>AddEngagementPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddEngagementPage.aspx.designer.cs">
-      <DependentUpon>AddEngagementPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clients.aspx.cs">
@@ -237,72 +205,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Engagement.cs" />
-    <Compile Include="Models\FoundryContext.cs" />
-    <Compile Include="Models\FoundryDatabaseInitializer.cs" />
-    <Compile Include="ModifyClientPage.aspx.cs">
-      <DependentUpon>ModifyClientPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModifyClientPage.aspx.designer.cs">
-      <DependentUpon>ModifyClientPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModifyEmployeePage.aspx.cs">
-      <DependentUpon>ModifyEmployeePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModifyEmployeePage.aspx.designer.cs">
-      <DependentUpon>ModifyEmployeePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ModifyEngagementPage.aspx.cs">
-      <DependentUpon>ModifyEngagementPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModifyEngagementPage.aspx.designer.cs">
-      <DependentUpon>ModifyEngagementPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoveClientPage.aspx.cs">
-      <DependentUpon>RemoveClientPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RemoveClientPage.aspx.designer.cs">
-      <DependentUpon>RemoveClientPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RemoveEmployeePage.aspx.cs">
-      <DependentUpon>RemoveEmployeePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RemoveEmployeePage.aspx.designer.cs">
-      <DependentUpon>RemoveEmployeePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RemoveEngagementPage.aspx.cs">
-      <DependentUpon>RemoveEngagementPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RemoveEngagementPage.aspx.designer.cs">
-      <DependentUpon>RemoveEngagementPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SearchClientPage.aspx.cs">
-      <DependentUpon>SearchClientPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SearchClientPage.aspx.designer.cs">
-      <DependentUpon>SearchClientPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SearchEmployeePage.aspx.cs">
-      <DependentUpon>SearchEmployeePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SearchEmployeePage.aspx.designer.cs">
-      <DependentUpon>SearchEmployeePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SearchEngagementPage.aspx.cs">
-      <DependentUpon>SearchEngagementPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SearchEngagementPage.aspx.designer.cs">
-      <DependentUpon>SearchEngagementPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

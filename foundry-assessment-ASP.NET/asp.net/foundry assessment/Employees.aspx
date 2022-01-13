@@ -1,46 +1,43 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Employees.aspx.cs" Inherits="foundry_assessment.Employees" %>
+﻿<%@ Page Title="" Async="true" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Employees.aspx.cs" Inherits="foundry_assessment.Employees" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    <div class="row">
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/AddEmployeePage">Add Employee &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/SearchEmployeePage">Search Employee &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/ModifyEmployeePage">Modify Employee &raquo;</a>
-            </p>
-        </div>
-        <div class="col-sm-3">
-            <p>
-                <a class="btn btn-default" runat="server" href="~/RemoveEmployeePage">Remove Employee &raquo;</a>
-            </p>
-        </div>
-    </div>
-    <br />
-
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
+          <th scope="col">Employee Id <br />
+              <asp:TextBox ID="employeeID" runat="server" />
+          </th>
+          <th scope="col">Employee Name <br />
+              <asp:TextBox ID="employeeName" runat="server" />
+          </th>
+          <th scope="col">
+              <asp:Button ID="btnAdd" runat="server" Text="Add Employee" />
+          </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>0</td>
-          <td>Test</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Test2</td>
-        </tr>
-      </tbody>
     </table>
+    <br />
+
+    <hr />
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="true" Width="450">
+           <Columns>
+            <asp:TemplateField HeaderText="Employee ID">
+                <ItemTemplate>
+                    <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("id") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Employee Name">
+                <ItemTemplate>
+                    <asp:Label ID="lblEmployeeName" runat="server" Text='<%# Eval("name") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtEmployeeName" runat="server" Text='<%# Eval("name") %>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />
+        </Columns>
+    </asp:GridView>
 </asp:Content>

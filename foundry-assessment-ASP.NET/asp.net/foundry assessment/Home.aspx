@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>Foundry Assessment</h1>
-        <p class="lead">Employee and Client Engagement Management</p>
+        <h1>Foundry Management Application</h1>
+        <p class="lead"> An application to manage employee and client engagements</p>
     </div>
 
     <div class="row">

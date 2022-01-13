@@ -2,35 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace foundry_assessment.Models
 {
     public class Engagement
     {
-        [Key, Display(Name = "id")]
-        public int EngagementID { get; set; }
+        public string id { get; set; }
 
-        [Required, Display(Name = "name")]
-        public string EngagementName { get; set; }
+        public string name { get; set; }
 
-        [Display(Name = "description")]
-        public string EngagementDescription { get; set; }
+        public string description { get; set; }
 
-        [Required, Display(Name = "started")]
-        public DateTime Started { get; set; }
+        public DateTime started { get; set; }
 
-        [Display(Name = "ended")]
-        public DateTime Ended { get; set; }
+        public DateTime ended { get; set; }
 
-        [Required, Display(Name = "id")]
-        public int EmployeeID { get; set; }
+        public string employee { get; set; }
 
-        [Required, Display(Name = "id")]
-        public int ClientID { get; set; }
+        public string client { get; set; }
 
-        public virtual Employee Employee { get; set; }
+/*        public virtual Employee Employee { get; set; }
 
-        public virtual Client Client { get; set; }
+        public virtual Client Client { get; set; }*/
     }
 }
