@@ -19,8 +19,7 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvClients" runat="server" PageSize="3" AllowPaging="true"
-        Width="450">
+    <asp:GridView ID="gvClients" runat="server" PageSize="3" AllowPaging="true" Width="450" AutoGenerateColumns="false">
         <Columns>
             <asp:TemplateField HeaderText="Client ID">
                 <ItemTemplate>

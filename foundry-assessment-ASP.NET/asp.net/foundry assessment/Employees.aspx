@@ -19,8 +19,8 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="true" Width="450">
-           <Columns>
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="true" Width="450" AutoGenerateColumns="false">
+       <Columns>
             <asp:TemplateField HeaderText="Employee ID">
                 <ItemTemplate>
                     <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
