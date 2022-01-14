@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using foundry_assessment.Models;
+using System.Text;
 
 namespace foundry_assessment
 {
@@ -34,7 +35,69 @@ namespace foundry_assessment
                     gvClients.DataSource = data;
                     gvClients.DataBind();
 
-                    Response.Write("<script>alert('Data loaded successfully');</script>");
+                    //Response.Write("<script>alert('Data loaded successfully');</script>");
+                }
+            }
+        }
+
+        protected void InsertClient(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(InsertClientAsync));
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+
+        }
+
+        protected async Task InsertClientAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                if (clientName.Text.Length > 0)
+                {
+                    // Create client object to POST to backend
+                    Client businessClient = new Client { name = clientName.Text };
+                    var jsonInput = JsonConvert.SerializeObject(businessClient);
+                    var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                    // HTTP POST call
+                    HttpResponseMessage response = await client.PostAsync("http://localhost:5000/clients", requestContent);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.Write("Success");
+                    }
+                    else
+                    {
+                        Console.Write("Error");
+                    }
+                }
+            }
+        }
+
+        protected void SearchClient(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSourceByID));
+        }
+
+        protected async Task RunAsyncGetDataFromSourceByID()
+        {
+            using (var client = new HttpClient())
+            {
+                if (clientID.Text.Length > 0)
+                {
+                    //HTTP GET call by Client ID
+                    string apiURL = "http://localhost:5000/clients/" + clientID.Text;
+                    HttpResponseMessage response = await client.GetAsync(apiURL);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonString = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<Client>(jsonString);
+                        var dataToBind = new List<Client>() { data };
+                        gvClients.DataSource = dataToBind;
+                        gvClients.DataBind();
+                    }
                 }
             }
         }

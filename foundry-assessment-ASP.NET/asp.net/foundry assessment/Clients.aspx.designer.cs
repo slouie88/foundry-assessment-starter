@@ -15,15 +15,6 @@ namespace foundry_assessment
     {
 
         /// <summary>
-        /// clientID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clientID;
-
-        /// <summary>
         /// clientName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,24 @@ namespace foundry_assessment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAdd;
+
+        /// <summary>
+        /// clientID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox clientID;
+
+        /// <summary>
+        /// btnAdd2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd2;
 
         /// <summary>
         /// gvClients control.

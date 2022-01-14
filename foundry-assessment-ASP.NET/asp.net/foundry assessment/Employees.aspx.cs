@@ -20,7 +20,7 @@ namespace foundry_assessment
             RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
         }
 
-        async Task RunAsyncGetDataFromSource()
+        protected async Task RunAsyncGetDataFromSource()
         {
             using (var client = new HttpClient())
             {
@@ -50,22 +50,25 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                // Create employee object to POST to backend
-                Employee employee = new Employee { name = employeeName.Text };
-                var jsonInput = JsonConvert.SerializeObject(employee);
-                var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-
-                // HTTP POST call
-                HttpResponseMessage response = await client.PostAsync("http://localhost:5000/employees", requestContent);
-                response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
+                if (employeeName.Text.Length > 0)
                 {
-                    Console.Write("Success");
-                }
-                else
-                {
-                    Console.Write("Error");
+                    // Create employee object to POST to backend
+                    Employee employee = new Employee { name = employeeName.Text };
+                    var jsonInput = JsonConvert.SerializeObject(employee);
+                    var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                    // HTTP POST call
+                    HttpResponseMessage response = await client.PostAsync("http://localhost:5000/employees", requestContent);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.Write("Success");
+                    }
+                    else
+                    {
+                        Console.Write("Error");
+                    }
                 }
             }
         }
@@ -79,18 +82,21 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                //HTTP GET call by Employee ID
-                string apiURL = "http://localhost:5000/employees/" + employeeID.Text;
-                HttpResponseMessage response = await client.GetAsync(apiURL);
-                response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
+                if (employeeID.Text.Length > 0)
                 {
-                    var jsonString = response.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<Employee>(jsonString);
-                    var dataToBind = new List<Employee>() { data };
-                    gvEmployees.DataSource = dataToBind;
-                    gvEmployees.DataBind();
+                    //HTTP GET call by Employee ID
+                    string apiURL = "http://localhost:5000/employees/" + employeeID.Text;
+                    HttpResponseMessage response = await client.GetAsync(apiURL);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonString = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<Employee>(jsonString);
+                        var dataToBind = new List<Employee>() { data };
+                        gvEmployees.DataSource = dataToBind;
+                        gvEmployees.DataBind();
+                    }
                 }
             }
         }
