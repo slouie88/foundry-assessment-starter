@@ -24,14 +24,14 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false">
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit">
        <Columns>
             <asp:TemplateField HeaderText="Employee ID">
                 <ItemTemplate>
                     <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("id") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("id") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Employee Name">

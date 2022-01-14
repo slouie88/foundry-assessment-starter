@@ -101,5 +101,56 @@ namespace foundry_assessment
                 }
             }
         }
+
+        protected void OnRowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvClients.EditIndex = e.NewEditIndex;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
+        protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = gvClients.Rows[e.RowIndex];
+            Task.Run(async () => await EditClient(row));
+            gvClients.EditIndex = -1;
+            Task.Run(async () => await RunAsyncGetDataFromSource());
+        }
+
+        protected async Task EditClient(GridViewRow r)
+        {
+            string name = (r.FindControl("txtClientName") as TextBox).Text;
+            string id = (r.FindControl("txtClientID") as TextBox).Text;
+
+            using (var client = new HttpClient())
+            {
+                if (name.Length > 0)
+                {
+                    // Create client object to PUT to backend
+                    Client businessClient = new Client { name = name };
+                    var jsonInput = JsonConvert.SerializeObject(businessClient);
+                    var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                    // HTTP PUT call by Client ID
+                    string apiURL = "http://localhost:5000/clients/" + id;
+                    HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.Write("Success");
+                    }
+                    else
+                    {
+                        Console.Write("Error");
+                    }
+                }
+            }
+        }
+
+        protected void OnRowCancellingEdit(object sender, EventArgs e)
+        {
+            gvClients.EditIndex = -1;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
     }
 }
