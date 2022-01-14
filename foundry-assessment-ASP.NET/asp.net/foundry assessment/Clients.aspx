@@ -10,13 +10,16 @@
           <th scope="col">
               <asp:Button ID="btnAdd" runat="server" Text="Add Client" OnClick="InsertClient"/>
           </th>
+          <th scope="col">
+              <asp:Button ID="btnsearchname" runat="server" Text="Search Client by Name" OnClick="SearchClientByName"/>
+          </th>
         </tr>
         <tr>
             <th scope="col">Client ID <br />
                 <asp:TextBox ID="clientID" runat="server"/>
             </th>
             <th scope="col">
-                <asp:Button ID="btnAdd2" runat="server" Text="Search for Client" OnClick="SearchClient" />
+                <asp:Button ID="btnsearchid" runat="server" Text="Search by Client ID" OnClick="SearchClient" />
             </th>
         </tr>
       </thead>

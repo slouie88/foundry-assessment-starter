@@ -101,6 +101,39 @@ namespace foundry_assessment
             }
         }
 
+        protected void SearchEmployeeByName(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSourceByName));
+        }
+
+        protected async Task RunAsyncGetDataFromSourceByName()
+        {
+            using (var client = new HttpClient())
+            {
+                //HTTP GET call
+                HttpResponseMessage response = await client.GetAsync("http://localhost:5000/employees");
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = response.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<List<Employee>>(jsonString);
+
+                    // Filter by employee name in the text box
+                    foreach (Employee e in data.ToList())
+                    {
+                        if (e.name != employeeName.Text)
+                        {
+                            data.Remove(e);
+                        }
+                    }
+
+                    gvEmployees.DataSource = data;
+                    gvEmployees.DataBind();
+                }
+            }
+        }
+
         protected void OnRowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEmployees.EditIndex = e.NewEditIndex;

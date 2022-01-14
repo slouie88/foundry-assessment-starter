@@ -33,6 +33,15 @@ namespace foundry_assessment
         protected global::System.Web.UI.WebControls.Button btnAdd;
 
         /// <summary>
+        /// btnsearchname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnsearchname;
+
+        /// <summary>
         /// employeeID control.
         /// </summary>
         /// <remarks>
@@ -42,13 +51,13 @@ namespace foundry_assessment
         protected global::System.Web.UI.WebControls.TextBox employeeID;
 
         /// <summary>
-        /// btnAdd2 control.
+        /// btnsearchid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd2;
+        protected global::System.Web.UI.WebControls.Button btnsearchid;
 
         /// <summary>
         /// gvEmployees control.
