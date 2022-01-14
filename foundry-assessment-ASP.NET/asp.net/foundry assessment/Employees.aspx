@@ -4,22 +4,27 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Employee Id <br />
-              <asp:TextBox ID="employeeID" runat="server" />
-          </th>
           <th scope="col">Employee Name <br />
-              <asp:TextBox ID="employeeName" runat="server" />
+              <asp:TextBox ID="employeeName" runat="server"/>
           </th>
           <th scope="col">
-              <asp:Button ID="btnAdd" runat="server" Text="Add Employee" />
+              <asp:Button ID="btnAdd" runat="server" Text="Add Employee" OnClick="InsertEmployee"/>
           </th>
+        </tr>
+        <tr>
+            <th scope="col">Employee ID <br />
+                <asp:TextBox ID="employeeID" runat="server"/>
+            </th>
+            <th scope="col">
+                <asp:Button ID="btnAdd2" runat="server" Text="Search for Employee" OnClick="SearchEmployee" />
+            </th>
         </tr>
       </thead>
     </table>
     <br />
 
     <hr />
-    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="true" Width="450" AutoGenerateColumns="false">
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false">
        <Columns>
             <asp:TemplateField HeaderText="Employee ID">
                 <ItemTemplate>
