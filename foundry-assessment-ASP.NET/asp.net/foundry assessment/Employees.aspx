@@ -24,7 +24,8 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit">
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit"
+        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound">
        <Columns>
             <asp:TemplateField HeaderText="Employee ID">
                 <ItemTemplate>
