@@ -47,15 +47,15 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false"
-        Width="450" AutoGenerateColumns="false">
+    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" 
+        OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit">
         <Columns>
             <asp:TemplateField HeaderText="Engagement ID">
                 <ItemTemplate>
                     <asp:Label ID="lblEngagementID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEngagementID" runat="server" Text='<%# Eval("id") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEngagementID" runat="server" Text='<%# Eval("id") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Engagement Name">
@@ -79,7 +79,7 @@
                     <asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("started") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtStartDate" runat="server" Text='<%# Eval("started") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtStartDate" runat="server" Text='<%# Eval("started") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="End Date">
@@ -87,7 +87,7 @@
                     <asp:Label ID="lblEndDate" runat="server" Text='<%# Eval("ended") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEndDate" runat="server" Text='<%# Eval("ended") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEndDate" runat="server" Text='<%# Eval("ended") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Employee ID">
@@ -95,7 +95,7 @@
                     <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("employee") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("employee") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("employee") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Client ID">
@@ -103,7 +103,7 @@
                     <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("client") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("client") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("client") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />

@@ -82,7 +82,7 @@ namespace foundry_assessment
             {
                 if (engagementIDSearch.Text.Length > 0)
                 {
-                    //HTTP GET call by Client ID
+                    //HTTP GET call by Engagement ID
                     string apiURL = "http://localhost:5000/engagements/" + engagementIDSearch.Text;
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
@@ -97,6 +97,58 @@ namespace foundry_assessment
                     }
                 }
             }
+        }
+
+        protected void OnRowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvEngagements.EditIndex = e.NewEditIndex;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
+        protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = gvEngagements.Rows[e.RowIndex];
+            Task.Run(async () => await EditEngagement(row));
+            gvEngagements.EditIndex = -1;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
+        protected async Task EditEngagement(GridViewRow r)
+        {
+            string name = (r.FindControl("txtEngagementName") as TextBox).Text;
+            string description = (r.FindControl("txtEngagementDescription") as TextBox).Text;
+            string id = (r.FindControl("txtEngagementID") as TextBox).Text;
+
+            using (var client = new HttpClient())
+            {
+                if (name.Length > 0)
+                {
+                    // Create engagement object to PUT to backend
+                    Engagement engagement = new Engagement { name = name, description=description };
+                    var jsonInput = JsonConvert.SerializeObject(engagement);
+                    var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                    // HTTP PUT call by Client ID
+                    string apiURL = "http://localhost:5000/engagements/" + id;
+                    HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.Write("Success");
+                    }
+                    else
+                    {
+                        Console.Write("Error");
+                    }
+                }
+            }
+        }
+
+        protected void OnRowCancellingEdit(object sender, EventArgs e)
+        {
+            gvEngagements.EditIndex = -1;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
         }
     }
 }
