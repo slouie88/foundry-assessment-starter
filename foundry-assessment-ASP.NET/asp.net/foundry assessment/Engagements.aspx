@@ -17,7 +17,7 @@
               <asp:TextBox ID="engagementDescriptionAdd" runat="server" />
           </th>
           <th scope="col">
-              <asp:Button ID="addButton" runat="server" Text ="Add Engagement" />
+              <asp:Button ID="addButton" runat="server" Text ="Add Engagement" OnClick="InsertEngagement"/>
           </th>
         </tr>
         <tr>
