@@ -4,7 +4,7 @@
 
     <div class="jumbotron">
         <h1>Foundry Management Application</h1>
-        <p class="lead"> An application to manage employee and client engagements</p>
+        <p class="lead"> An application to manage employees, clients and their engagements</p>
     </div>
 
     <div class="row">

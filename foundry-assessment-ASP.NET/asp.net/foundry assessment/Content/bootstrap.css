@@ -190,6 +190,7 @@ table {
 td,
 th {
   padding: 0;
+  width: auto;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -257,6 +258,7 @@ th {
   .table td,
   .table th {
     background-color: #fff !important;
+    width: auto;
   }
   .table-bordered th,
   .table-bordered td {

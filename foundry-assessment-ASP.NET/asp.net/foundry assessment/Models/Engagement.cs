@@ -21,9 +21,5 @@ namespace foundry_assessment.Models
         public string employee { get; set; }
 
         public string client { get; set; }
-
-/*        public virtual Employee Employee { get; set; }
-
-        public virtual Client Client { get; set; }*/
     }
 }

@@ -1,32 +1,49 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Engagements.aspx.cs" Inherits="foundry_assessment.Engagements" %>
+﻿<%@ Page Title="" Async="true" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Engagements.aspx.cs" Inherits="foundry_assessment.Engagements" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <br />
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Engagement Id <br />
-              <asp:TextBox ID="engagementID" runat="server" />
-          </th>
           <th scope="col">Engagement Name <br />
-              <asp:TextBox ID="employeeName" runat="server" />
-          </th>
-          <th scope="col">Engagement Description <br />
-              <asp:TextBox ID="engagementDescription" runat="server" />
-          </th>
-          <th scope="col">Start Date <br />
-              <asp:TextBox ID="startDate" runat="server" />
-          </th>
-          <th scope="col">End Date <br />
-              <asp:TextBox ID="endDate" runat="server" />
-          </th>
-          <th scope="col">Employee Id <br />
-              <asp:TextBox ID="employeeID" runat="server" />
+              <asp:TextBox ID="engagementNameAdd" runat="server" />
           </th>
           <th scope="col">Client Id <br />
-              <asp:TextBox ID="clientID" runat="server" />
+              <asp:TextBox ID="clientIDAdd" runat="server" />
+          </th>
+          <th scope="col">Employee Id <br />
+              <asp:TextBox ID="employeeIDAdd" runat="server" />
+          </th>
+          <th scope="col">Engagement Description <br />
+              <asp:TextBox ID="engagementDescriptionAdd" runat="server" />
           </th>
           <th scope="col">
-              <asp:Button ID="btnAdd" runat="server" Text="Add Engagement" />
+              <asp:Button ID="addButton" runat="server" Text ="Add Engagement" />
+          </th>
+        </tr>
+        <tr>
+          <th>Engagement Id <br />
+              <asp:TextBox ID="engagementIDSearch" runat="server" />
+          </th>
+          <th>Engagement Name <br />
+              <asp:TextBox ID="engagementNameSearch" runat="server" />
+          </th>
+          <th>Engagement Description <br />
+              <asp:TextBox ID="engagementDescriptionSearch" runat="server" />
+          </th>
+          <th>Start Date <br />
+              <asp:TextBox ID="startDateSearch" runat="server" />
+          </th>
+          <th>End Date <br />
+              <asp:TextBox ID="endDateSearch" runat="server" />
+          </th>
+          <th>Employee Id <br />
+              <asp:TextBox ID="employeeIDSearch" runat="server" />
+          </th>
+          <th>Client Id <br />
+              <asp:TextBox ID="clientIDSearch" runat="server" />
+          </th>
+          <th>
+              <asp:Button ID="searchButton" runat="server" Text="Search Engagement" />
           </th>
         </tr>
       </thead>
@@ -34,15 +51,15 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="true"
-        Width="450">
+    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false"
+        Width="450" AutoGenerateColumns="false">
         <Columns>
             <asp:TemplateField HeaderText="Engagement ID">
                 <ItemTemplate>
-                    <asp:Label ID="lblEngagementID" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblEngagementID" runat="server" Text='<%# Eval("id") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEngagement" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEngagementID" runat="server" Text='<%# Eval("id") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Engagement Name">
@@ -55,42 +72,42 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Engagement Description">
                 <ItemTemplate>
-                    <asp:Label ID="lblEngagementDescription" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblEngagementDescription" runat="server" Text='<%# Eval("description") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEngagementDescription" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEngagementDescription" runat="server" Text='<%# Eval("description") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Start Date">
                 <ItemTemplate>
-                    <asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblStartDate" runat="server" Text='<%# Eval("started") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtStartDate" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtStartDate" runat="server" Text='<%# Eval("started") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="End Date">
                 <ItemTemplate>
-                    <asp:Label ID="lblEndDate" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblEndDate" runat="server" Text='<%# Eval("ended") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEndDate" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEndDate" runat="server" Text='<%# Eval("ended") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Employee ID">
                 <ItemTemplate>
-                    <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblEmployeeID" runat="server" Text='<%# Eval("employee") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEmployeeID" runat="server" Text='<%# Eval("employee") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Client ID">
                 <ItemTemplate>
-                    <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("client") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("client") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />

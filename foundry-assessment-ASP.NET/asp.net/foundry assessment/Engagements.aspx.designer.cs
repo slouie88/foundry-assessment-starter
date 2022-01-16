@@ -15,76 +15,121 @@ namespace foundry_assessment
     {
 
         /// <summary>
-        /// engagementID control.
+        /// engagementNameAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox engagementID;
+        protected global::System.Web.UI.WebControls.TextBox engagementNameAdd;
 
         /// <summary>
-        /// employeeName control.
+        /// clientIDAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeName;
+        protected global::System.Web.UI.WebControls.TextBox clientIDAdd;
 
         /// <summary>
-        /// engagementDescription control.
+        /// employeeIDAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox engagementDescription;
+        protected global::System.Web.UI.WebControls.TextBox employeeIDAdd;
 
         /// <summary>
-        /// startDate control.
+        /// engagementDescriptionAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox startDate;
+        protected global::System.Web.UI.WebControls.TextBox engagementDescriptionAdd;
 
         /// <summary>
-        /// endDate control.
+        /// addButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox endDate;
+        protected global::System.Web.UI.WebControls.Button addButton;
 
         /// <summary>
-        /// employeeID control.
+        /// engagementIDSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeID;
+        protected global::System.Web.UI.WebControls.TextBox engagementIDSearch;
 
         /// <summary>
-        /// clientID control.
+        /// engagementNameSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clientID;
+        protected global::System.Web.UI.WebControls.TextBox engagementNameSearch;
 
         /// <summary>
-        /// btnAdd control.
+        /// engagementDescriptionSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.TextBox engagementDescriptionSearch;
+
+        /// <summary>
+        /// startDateSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox startDateSearch;
+
+        /// <summary>
+        /// endDateSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox endDateSearch;
+
+        /// <summary>
+        /// employeeIDSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox employeeIDSearch;
+
+        /// <summary>
+        /// clientIDSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox clientIDSearch;
+
+        /// <summary>
+        /// searchButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button searchButton;
 
         /// <summary>
         /// gvEngagements control.
