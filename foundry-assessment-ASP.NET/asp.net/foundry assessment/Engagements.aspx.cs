@@ -150,5 +150,42 @@ namespace foundry_assessment
             gvEngagements.EditIndex = -1;
             RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
         }
+
+        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridViewRow row = gvEngagements.Rows[e.RowIndex];
+            Task.Run(async () => await DeleteEngagement(row));
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
+        protected async Task DeleteEngagement(GridViewRow r)
+        {
+            string id = (r.FindControl("lblEngagementID") as Label).Text;
+
+            using (var client = new HttpClient())
+            {
+                //HTTP DELETE call
+                string apiURL = "http://localhost:5000/engagements/" + id;
+                var response = await client.DeleteAsync(apiURL);
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.Write("Success");
+                }
+                else
+                {
+                    Console.Write("Error");
+                }
+            }
+        }
+
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvEngagements.EditIndex)
+            {
+                (e.Row.Cells[7].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Client?');";
+            }
+        }
     }
 }

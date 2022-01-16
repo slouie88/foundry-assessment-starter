@@ -48,7 +48,8 @@
 
     <hr />
     <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" 
-        OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit">
+        OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit" 
+        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound">
         <Columns>
             <asp:TemplateField HeaderText="Engagement ID">
                 <ItemTemplate>
