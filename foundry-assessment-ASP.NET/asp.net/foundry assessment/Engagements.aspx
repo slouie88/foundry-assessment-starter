@@ -19,31 +19,27 @@
           <th scope="col">
               <asp:Button ID="addButton" runat="server" Text ="Add Engagement" OnClick="InsertEngagement"/>
           </th>
+          <th>
+              <asp:Button ID="searchButton" runat="server" Text="Search Engagement" />
+          </th>
         </tr>
         <tr>
           <th>Engagement Id <br />
               <asp:TextBox ID="engagementIDSearch" runat="server" />
           </th>
-          <th>Engagement Name <br />
-              <asp:TextBox ID="engagementNameSearch" runat="server" />
+          <th>
+              <asp:Button ID="searchByID" runat="server" Text="Search Engagement by ID" OnClick="SearchEngagement"/>
           </th>
-          <th>Engagement Description <br />
-              <asp:TextBox ID="engagementDescriptionSearch" runat="server" />
-          </th>
+        </tr>
+        <tr>
           <th>Start Date <br />
               <asp:TextBox ID="startDateSearch" runat="server" />
           </th>
           <th>End Date <br />
               <asp:TextBox ID="endDateSearch" runat="server" />
           </th>
-          <th>Employee Id <br />
-              <asp:TextBox ID="employeeIDSearch" runat="server" />
-          </th>
-          <th>Client Id <br />
-              <asp:TextBox ID="clientIDSearch" runat="server" />
-          </th>
           <th>
-              <asp:Button ID="searchButton" runat="server" Text="Search Engagement" />
+              <asp:Button ID="searchByDateButton" runat="server" Text="Search Engagement by Dates" />
           </th>
         </tr>
       </thead>

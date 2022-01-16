@@ -60,6 +60,15 @@ namespace foundry_assessment
         protected global::System.Web.UI.WebControls.Button addButton;
 
         /// <summary>
+        /// searchButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button searchButton;
+
+        /// <summary>
         /// engagementIDSearch control.
         /// </summary>
         /// <remarks>
@@ -69,22 +78,13 @@ namespace foundry_assessment
         protected global::System.Web.UI.WebControls.TextBox engagementIDSearch;
 
         /// <summary>
-        /// engagementNameSearch control.
+        /// searchByID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox engagementNameSearch;
-
-        /// <summary>
-        /// engagementDescriptionSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox engagementDescriptionSearch;
+        protected global::System.Web.UI.WebControls.Button searchByID;
 
         /// <summary>
         /// startDateSearch control.
@@ -105,31 +105,13 @@ namespace foundry_assessment
         protected global::System.Web.UI.WebControls.TextBox endDateSearch;
 
         /// <summary>
-        /// employeeIDSearch control.
+        /// searchByDateButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeIDSearch;
-
-        /// <summary>
-        /// clientIDSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clientIDSearch;
-
-        /// <summary>
-        /// searchButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button searchButton;
+        protected global::System.Web.UI.WebControls.Button searchByDateButton;
 
         /// <summary>
         /// gvEngagements control.

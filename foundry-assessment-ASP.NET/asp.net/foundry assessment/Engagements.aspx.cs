@@ -70,5 +70,33 @@ namespace foundry_assessment
                 }
             }
         }
+
+        protected void SearchEngagement(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSourceByID));
+        }
+
+        protected async Task RunAsyncGetDataFromSourceByID()
+        {
+            using (var client = new HttpClient())
+            {
+                if (engagementIDSearch.Text.Length > 0)
+                {
+                    //HTTP GET call by Client ID
+                    string apiURL = "http://localhost:5000/engagements/" + engagementIDSearch.Text;
+                    HttpResponseMessage response = await client.GetAsync(apiURL);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonString = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<Engagement>(jsonString);
+                        var dataToBind = new List<Engagement>() { data };
+                        gvEngagements.DataSource = dataToBind;
+                        gvEngagements.DataBind();
+                    }
+                }
+            }
+        }
     }
 }
