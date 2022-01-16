@@ -20,7 +20,7 @@
               <asp:Button ID="addButton" runat="server" Text ="Add Engagement" OnClick="InsertEngagement"/>
           </th>
           <th>
-              <asp:Button ID="searchButton" runat="server" Text="Search Engagement" />
+              <asp:Button ID="searchButton" runat="server" Text="Search Engagement" OnClick="SearchEngagementByOtherFields"/>
           </th>
         </tr>
         <tr>

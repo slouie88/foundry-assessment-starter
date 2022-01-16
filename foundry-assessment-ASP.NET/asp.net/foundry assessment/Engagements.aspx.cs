@@ -99,6 +99,57 @@ namespace foundry_assessment
             }
         }
 
+        protected void SearchEngagementByOtherFields(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSourceByOtherFields));
+        }
+
+        protected async Task RunAsyncGetDataFromSourceByOtherFields()
+        {
+            using (var client = new HttpClient())
+            {
+                // HTTP Get call
+                HttpResponseMessage response = await client.GetAsync("http://localhost:5000/engagements/");
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = response.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<List<Engagement>>(jsonString);
+
+                    // Filter by the input textboxes used for searching the engagement
+                    foreach (Engagement engagement in data.ToList())
+                    {
+                        if (engagementNameAdd.Text.Length > 0 && engagement.name != engagementNameAdd.Text)
+                        {
+                            data.Remove(engagement);
+                            continue;
+                        }
+
+                        if (clientIDAdd.Text.Length > 0 && engagement.client != clientIDAdd.Text)
+                        {
+                            data.Remove(engagement);
+                            continue;
+                        }
+
+                        if (employeeIDAdd.Text.Length > 0 && engagement.employee != employeeIDAdd.Text)
+                        {
+                            data.Remove(engagement);
+                            continue;
+                        }
+
+                        if (engagement.description != engagementDescriptionAdd.Text)
+                        {
+                            data.Remove(engagement);
+                        }
+                    }
+
+                    gvEngagements.DataSource = data;
+                    gvEngagements.DataBind();
+                }
+            }
+        }
+
         protected void OnRowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEngagements.EditIndex = e.NewEditIndex;
