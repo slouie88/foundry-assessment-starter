@@ -379,6 +379,24 @@ namespace foundry_assessment
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvEngagements.EditIndex)
             {
+                // Style engagements by current or end-dated
+                string startDateString = ((e.Row).FindControl("lblStartDate") as Label).Text;
+                string endDateString = ((e.Row).FindControl("lblEndDate") as Label).Text;
+                DateTime startDate = DateTime.Parse(startDateString);
+                DateTime endDate = DateTime.Parse(endDateString);
+                DateTime currentDate = DateTime.Now;
+
+                if ((startDate <= currentDate && currentDate <= endDate) || (startDate <= currentDate && endDateString.Equals("1/01/0001 12:00:00 AM"))) 
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccffdd");
+                }
+
+                else
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ffcc66");
+                }
+
+                // Confirmation to delete an engagement
                 (e.Row.Cells[8].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Engagement?');";
             }
         }
