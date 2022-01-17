@@ -246,6 +246,41 @@ namespace foundry_assessment
             }
         }
 
+        protected void EndDateEngagement(object sender, GridViewCommandEventArgs e)
+        {
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = gvEngagements.Rows[rowIndex];
+            Task.Run(async () => await EndDateEngagementAsync(row));
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
+        protected async Task EndDateEngagementAsync(GridViewRow r)
+        {
+            string id = (r.FindControl("lblEngagementID") as Label).Text;
+
+            using (var client = new HttpClient())
+            {
+                // Create engagement object to PUT to backend
+                Engagement engagement = new Engagement { id = id };
+                var jsonInput = JsonConvert.SerializeObject(engagement);
+                var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                //HTTP PUT call
+                string apiURL = "http://localhost:5000/engagements/" + id + "/end";
+                HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.Write("Success");
+                }
+                else
+                {
+                    Console.Write("Error");
+                }
+            }
+        }
+
         protected void OnRowCancellingEdit(object sender, EventArgs e)
         {
             gvEngagements.EditIndex = -1;
@@ -285,7 +320,7 @@ namespace foundry_assessment
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvEngagements.EditIndex)
             {
-                (e.Row.Cells[7].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Client?');";
+                (e.Row.Cells[8].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Engagement?');";
             }
         }
     }

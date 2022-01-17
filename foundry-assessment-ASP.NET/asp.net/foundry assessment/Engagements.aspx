@@ -49,7 +49,7 @@
     <hr />
     <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" 
         OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit" 
-        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound">
+        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound" OnRowCommand="EndDateEngagement">
         <Columns>
             <asp:TemplateField HeaderText="Engagement ID">
                 <ItemTemplate>
@@ -107,6 +107,7 @@
                     <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("client") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
+            <asp:ButtonField ButtonType="Button" HeaderText="End Engagement?" Text="End-Date Engagement"/>
             <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />
         </Columns>
     </asp:GridView>
