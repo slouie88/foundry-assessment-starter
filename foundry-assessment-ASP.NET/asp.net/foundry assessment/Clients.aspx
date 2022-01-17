@@ -28,8 +28,9 @@
 
     <hr />
     <asp:GridView ID="gvClients" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit"
-        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound">
+        OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound" OnRowCommand="ShowClientEngagements">
         <Columns>
+            <asp:ButtonField ButtonType="Button" HeaderText="View Engagements" Text="View" /> 
             <asp:TemplateField HeaderText="Client ID">
                 <ItemTemplate>
                     <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("id") %>'></asp:Label>

@@ -16,7 +16,25 @@ namespace foundry_assessment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            if (Session["employeeID"] != null)
+            {
+                employeeIDAdd.Text = Session["employeeID"].ToString();
+                RegisterAsyncTask(new PageAsyncTask(ListEngagementsByEmployee));
+                Session.Remove("employeeID");
+            }
+
+            else if (Session["clientID"] != null)
+            {
+                clientIDAdd.Text = Session["clientID"].ToString();
+                RegisterAsyncTask(new PageAsyncTask(ListEngagementsByClient));
+                Session.Remove("clientID");
+            }
+
+            else
+            {
+                RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            }
+
         }
 
         protected async Task RunAsyncGetDataFromSource()
@@ -49,23 +67,64 @@ namespace foundry_assessment
             using (var client = new HttpClient()) {
                 if (engagementNameAdd.Text.Length > 0 && clientIDAdd.Text.Length > 0 && employeeIDAdd.Text.Length > 0)
                 {
-                    // Create engagement object to POST into the backend
-                    Engagement engagement = new Engagement { name = engagementNameAdd.Text, client = clientIDAdd.Text,
-                        employee = employeeIDAdd.Text, description = engagementDescriptionAdd.Text };
-                    var jsonInput = JsonConvert.SerializeObject(engagement);
-                    var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+                    bool employeeExists = false;
+                    bool clientExists = false;
+                    
+                    // Check if employee exists
+                    string apiURLEmployee = "http://localhost:5000/employees/" + employeeIDAdd.Text;
+                    HttpResponseMessage responseEmployee = await client.GetAsync(apiURLEmployee);
+                    responseEmployee.EnsureSuccessStatusCode();
 
-                    // HTTP POST call
-                    HttpResponseMessage response = await client.PostAsync("http://localhost:5000/engagements", requestContent);
-                    response.EnsureSuccessStatusCode();
-
-                    if (response.IsSuccessStatusCode)
+                    if (responseEmployee.IsSuccessStatusCode)
                     {
-                        Console.Write("Success");
+                        var jsonString = responseEmployee.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<Employee>(jsonString);
+                        employeeExists = data != null;
+                        System.Diagnostics.Debug.WriteLine(employeeExists);
                     }
+
+                    // Check if client exists
+                    string apiURLClient = "http://localhost:5000/clients/" + clientIDAdd.Text;
+                    HttpResponseMessage responseClient = await client.GetAsync(apiURLClient);
+                    responseClient.EnsureSuccessStatusCode();
+
+                    if (responseClient.IsSuccessStatusCode)
+                    {
+                        var jsonString = responseClient.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<Client>(jsonString);
+                        clientExists = data != null;
+                        System.Diagnostics.Debug.WriteLine(clientExists);
+                    }
+
+                    if (employeeExists && clientExists)
+                    {
+                        // Create engagement object to POST into the backend
+                        Engagement engagement = new Engagement { name = engagementNameAdd.Text, client = clientIDAdd.Text, employee = employeeIDAdd.Text, description = engagementDescriptionAdd.Text };
+                        var jsonInput = JsonConvert.SerializeObject(engagement);
+                        var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+
+                        // HTTP POST call
+                        HttpResponseMessage response = await client.PostAsync("http://localhost:5000/engagements", requestContent);
+                        response.EnsureSuccessStatusCode();
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Console.Write("Success");
+                        }
+                        else
+                        {
+                            Console.Write("Error");
+                        }
+                    }
+
+                    else if (!employeeExists)
+                    {
+                        Response.Write("<script>alert('Employee does not exist.');</script>");
+                    }
+
                     else
                     {
-                        Console.Write("Error");
+                        Response.Write("<script>alert('Client does not exist.');</script>");
                     }
                 }
             }
@@ -138,7 +197,7 @@ namespace foundry_assessment
                             continue;
                         }
 
-                        if (engagement.description != engagementDescriptionAdd.Text)
+                        if (engagementDescriptionAdd.Text.Length > 0 && engagement.description != engagementDescriptionAdd.Text)
                         {
                             data.Remove(engagement);
                         }
@@ -323,5 +382,52 @@ namespace foundry_assessment
                 (e.Row.Cells[8].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Engagement?');";
             }
         }
+
+        protected async Task ListEngagementsByEmployee()
+        {
+            using (var client = new HttpClient())
+            {
+                if (employeeIDAdd.Text.Length > 0)
+                {
+                    //HTTP GET call by Employee ID
+                    string apiURL = "http://localhost:5000/employees/" + employeeIDAdd.Text + "/engagements";
+                    HttpResponseMessage response = await client.GetAsync(apiURL);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonString = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<IList<Engagement>>(jsonString);
+
+                        gvEngagements.DataSource = data;
+                        gvEngagements.DataBind();
+                    }
+                }
+            }
+        }
+
+        protected async Task ListEngagementsByClient()
+        {
+            using (var client = new HttpClient())
+            {
+                if (clientIDAdd.Text.Length > 0)
+                {
+                    //HTTP GET call by Client ID
+                    string apiURL = "http://localhost:5000/clients/" + clientIDAdd.Text + "/engagements";
+                    HttpResponseMessage response = await client.GetAsync(apiURL);
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonString = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<IList<Engagement>>(jsonString);
+
+                        gvEngagements.DataSource = data;
+                        gvEngagements.DataBind();
+                    }
+                }
+            }
+        }
     }
 }
+

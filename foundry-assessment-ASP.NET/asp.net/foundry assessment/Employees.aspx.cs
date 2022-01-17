@@ -218,8 +218,17 @@ namespace foundry_assessment
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvEmployees.EditIndex)
             {
-                (e.Row.Cells[2].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Employee?');";
+                (e.Row.Cells[3].Controls[2] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this Employee?');";
             }
+        }
+
+        protected void ShowEmployeeEngagements(object sender, GridViewCommandEventArgs e)
+        {
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = gvEmployees.Rows[rowIndex];
+            string id = (row.FindControl("lblEmployeeID") as Label).Text;
+            Session["employeeID"] = id;
+            Response.Redirect("Engagements.aspx");
         }
 
     }
