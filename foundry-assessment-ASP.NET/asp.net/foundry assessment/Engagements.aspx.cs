@@ -108,7 +108,7 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                // HTTP Get call
+                // HTTP GET call
                 HttpResponseMessage response = await client.GetAsync("http://localhost:5000/engagements/");
                 response.EnsureSuccessStatusCode();
 
@@ -141,6 +141,56 @@ namespace foundry_assessment
                         if (engagement.description != engagementDescriptionAdd.Text)
                         {
                             data.Remove(engagement);
+                        }
+                    }
+
+                    gvEngagements.DataSource = data;
+                    gvEngagements.DataBind();
+                }
+            }
+        }
+
+        protected void SearchEngagementByDates(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSourceByDates));
+        }
+
+        protected async Task RunAsyncGetDataFromSourceByDates()
+        {
+            using (var client = new HttpClient())
+            {
+                // HTTP GET Call
+                HttpResponseMessage response = await client.GetAsync("http://localhost:5000/engagements/");
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = response.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<List<Engagement>>(jsonString);
+
+                    // Filter by the input date textboxes used for searching the engagement
+                    foreach (Engagement engagement in data.ToList())
+                    {
+                        if (startDateSearch.Text.Length > 0)
+                        {
+                            string engagementStartDate = engagement.started.ToString();
+
+                            if (!(engagementStartDate.Equals(startDateSearch.Text)))
+                            {
+                                data.Remove(engagement);
+                                continue;
+                            }
+                        }
+
+                        if (endDateSearch.Text.Length > 0)
+                        {
+                            string engagementEndDate = engagement.ended.ToString();
+
+                            if (!(engagementEndDate.Equals(endDateSearch.Text)))
+                            {
+                                data.Remove(engagement);
+                                continue;
+                            }
                         }
                     }
 

@@ -39,7 +39,7 @@
               <asp:TextBox ID="endDateSearch" runat="server" />
           </th>
           <th>
-              <asp:Button ID="searchByDateButton" runat="server" Text="Search Engagement by Dates" />
+              <asp:Button ID="searchByDateButton" runat="server" Text="Search Engagement by Dates" OnClick="SearchEngagementByDates"/>
           </th>
         </tr>
       </thead>
