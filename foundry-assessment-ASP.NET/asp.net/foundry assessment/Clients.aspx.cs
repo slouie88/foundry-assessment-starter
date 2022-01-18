@@ -146,7 +146,7 @@ namespace foundry_assessment
             GridViewRow row = gvClients.Rows[e.RowIndex];
             Task.Run(async () => await EditClient(row));
             gvClients.EditIndex = -1;
-            Task.Run(async () => await RunAsyncGetDataFromSource());
+            Response.Redirect("Clients.aspx");
         }
 
         protected async Task EditClient(GridViewRow r)
@@ -190,7 +190,7 @@ namespace foundry_assessment
         {
             GridViewRow row = gvClients.Rows[e.RowIndex];
             Task.Run(async () => await DeleteClient(row));
-            Task.Run(async () => await RunAsyncGetDataFromSource());
+            Response.Redirect("Clients.aspx");
         }
 
         protected async Task DeleteClient(GridViewRow r)
@@ -225,11 +225,14 @@ namespace foundry_assessment
 
         protected void ShowClientEngagements(object sender, GridViewCommandEventArgs e)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvClients.Rows[rowIndex];
-            string id = (row.FindControl("lblClientID") as Label).Text;
-            Session["clientID"] = id;
-            Response.Redirect("Engagements.aspx");
+            if (e.CommandName == "viewEngagements")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gvClients.Rows[rowIndex];
+                string id = (row.FindControl("lblClientID") as Label).Text;
+                Session["clientID"] = id;
+                Response.Redirect("Engagements.aspx");
+            }
         }
     }
 }

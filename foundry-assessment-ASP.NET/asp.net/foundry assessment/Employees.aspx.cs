@@ -145,7 +145,7 @@ namespace foundry_assessment
             GridViewRow row = gvEmployees.Rows[e.RowIndex];
             Task.Run(async () => await EditEmployee(row));
             gvEmployees.EditIndex = -1;
-            Task.Run(async () => await RunAsyncGetDataFromSource());
+            Response.Redirect("Employees.aspx");
         }
 
         protected async Task EditEmployee(GridViewRow r)
@@ -189,7 +189,7 @@ namespace foundry_assessment
         {
             GridViewRow row = gvEmployees.Rows[e.RowIndex];
             Task.Run(async () => await DeleteEmployee(row));
-            Task.Run(async () => await RunAsyncGetDataFromSource());
+            Response.Redirect("Employees.aspx");
         }
 
         protected async Task DeleteEmployee(GridViewRow r)
@@ -224,11 +224,14 @@ namespace foundry_assessment
 
         protected void ShowEmployeeEngagements(object sender, GridViewCommandEventArgs e)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvEmployees.Rows[rowIndex];
-            string id = (row.FindControl("lblEmployeeID") as Label).Text;
-            Session["employeeID"] = id;
-            Response.Redirect("Engagements.aspx");
+            if (e.CommandName == "viewEngagements")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gvEmployees.Rows[rowIndex];
+                string id = (row.FindControl("lblEmployeeID") as Label).Text;
+                Session["employeeID"] = id;
+                Response.Redirect("Engagements.aspx");
+            }
         }
 
     }

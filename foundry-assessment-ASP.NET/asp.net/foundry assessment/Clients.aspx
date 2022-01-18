@@ -30,7 +30,7 @@
     <asp:GridView ID="gvClients" runat="server" PageSize="3" AllowPaging="false" CssClass="mydatagrid" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit"
         OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound" OnRowCommand="ShowClientEngagements">
         <Columns>
-            <asp:ButtonField ButtonType="Button" HeaderText="View Engagements" Text="View" /> 
+            <asp:ButtonField ButtonType="Button" HeaderText="View Engagements" Text="View" CommandName="viewEngagements"/> 
             <asp:TemplateField HeaderText="Client ID">
                 <ItemTemplate>
                     <asp:Label ID="lblClientID" runat="server" Text='<%# Eval("id") %>'></asp:Label>

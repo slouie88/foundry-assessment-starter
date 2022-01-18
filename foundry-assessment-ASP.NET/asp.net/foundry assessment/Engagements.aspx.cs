@@ -270,7 +270,7 @@ namespace foundry_assessment
             GridViewRow row = gvEngagements.Rows[e.RowIndex];
             Task.Run(async () => await EditEngagement(row));
             gvEngagements.EditIndex = -1;
-            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            Response.Redirect("Engagements.aspx");
         }
 
         protected async Task EditEngagement(GridViewRow r)
@@ -318,7 +318,7 @@ namespace foundry_assessment
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = gvEngagements.Rows[rowIndex];
                 Task.Run(async () => await EndDateEngagementAsync(row));
-                RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+                Response.Redirect("Engagements.aspx");
             }
         }
 
@@ -353,7 +353,7 @@ namespace foundry_assessment
         {
             GridViewRow row = gvEngagements.Rows[e.RowIndex];
             Task.Run(async () => await DeleteEngagement(row));
-            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            Response.Redirect("Engagements.aspx");
         }
 
         protected async Task DeleteEngagement(GridViewRow r)
