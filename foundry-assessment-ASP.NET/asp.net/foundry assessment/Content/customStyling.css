@@ -14,7 +14,11 @@
 }
 
 .mydatagrid th {
-    text-align:center;
+    text-align: center;
     padding: 5px;
+}
+
+.header {
+    background-color: #e6f5ff;
 }
 
