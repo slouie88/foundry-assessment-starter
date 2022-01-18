@@ -47,7 +47,7 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" 
+    <asp:GridView ID="gvEngagements" runat="server" PageSize="3" AllowPaging="false" HeaderStyle-Wrap="false" CssClass="mydatagrid" RowStyle-CssClass="rows" AutoGenerateColumns="false" 
         OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit" 
         OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound" OnRowCommand="EndDateEngagement">
         <Columns>
@@ -107,7 +107,7 @@
                     <asp:TextBox ID="txtClientID" runat="server" Text='<%# Eval("client") %>' Enabled="false"></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
-            <asp:ButtonField ButtonType="Button" HeaderText="End Engagement?" Text="End-Date Engagement"/>
+            <asp:ButtonField ButtonType="Button" HeaderText="End Engagement?" Text="End-Date Engagement" CommandName="endEngagement"/>
             <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowDeleteButton="true" />
         </Columns>
     </asp:GridView>

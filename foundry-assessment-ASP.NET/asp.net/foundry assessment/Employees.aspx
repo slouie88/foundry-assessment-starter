@@ -27,7 +27,7 @@
     <br />
 
     <hr />
-    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" Width="450" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit"
+    <asp:GridView ID="gvEmployees" runat="server" PageSize="3" AllowPaging="false" CssClass="mydatagrid" RowStyle-CssClass="rows" AutoGenerateColumns="false" OnRowEditing="OnRowEditing" OnRowUpdating="OnRowUpdating" OnRowCancelingEdit="OnRowCancellingEdit"
         OnRowDeleting="OnRowDeleting" OnRowDataBound="OnRowDataBound" OnRowCommand="ShowEmployeeEngagements">
        <Columns>
            <asp:ButtonField ButtonType="Button" HeaderText="View Engagements" Text="View" /> 

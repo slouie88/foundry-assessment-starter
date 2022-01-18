@@ -1,0 +1,20 @@
+﻿/* GridView Table Styling */
+.mydatagrid {
+    width: auto;
+    border: solid 2px black;
+    min-width: 80%;
+    text-align:center;
+    padding: 50px;
+}
+
+.rows {
+    font-family: Arial;
+    font-size: 14px;
+    text-align: center;
+}
+
+.mydatagrid th {
+    text-align:center;
+    padding: 5px;
+}
+

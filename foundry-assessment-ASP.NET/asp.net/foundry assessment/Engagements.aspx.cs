@@ -305,12 +305,21 @@ namespace foundry_assessment
             }
         }
 
+        protected void OnRowCancellingEdit(object sender, EventArgs e)
+        {
+            gvEngagements.EditIndex = -1;
+            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+        }
+
         protected void EndDateEngagement(object sender, GridViewCommandEventArgs e)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvEngagements.Rows[rowIndex];
-            Task.Run(async () => await EndDateEngagementAsync(row));
-            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            if (e.CommandName == "endEngagement")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gvEngagements.Rows[rowIndex];
+                Task.Run(async () => await EndDateEngagementAsync(row));
+                RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
+            }
         }
 
         protected async Task EndDateEngagementAsync(GridViewRow r)
@@ -338,12 +347,6 @@ namespace foundry_assessment
                     Console.Write("Error");
                 }
             }
-        }
-
-        protected void OnRowCancellingEdit(object sender, EventArgs e)
-        {
-            gvEngagements.EditIndex = -1;
-            RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
         }
 
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -448,4 +451,3 @@ namespace foundry_assessment
         }
     }
 }
-

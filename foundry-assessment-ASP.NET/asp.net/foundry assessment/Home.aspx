@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>Foundry Management Application</h1>
+        <h1>Welcome to the Foundry Management System</h1>
         <p class="lead"> An application to manage employees, clients and their engagements</p>
     </div>
 
