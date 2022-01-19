@@ -50,25 +50,21 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (employeeName.Text.Length > 0)
+                if (employeeName.Text.Trim().Length > 0)
                 {
                     // Create employee object to POST to backend
-                    Employee employee = new Employee { name = employeeName.Text };
+                    Employee employee = new Employee { name = employeeName.Text.Trim() };
                     var jsonInput = JsonConvert.SerializeObject(employee);
                     var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
 
                     // HTTP POST call
                     HttpResponseMessage response = await client.PostAsync("http://localhost:5000/employees", requestContent);
                     response.EnsureSuccessStatusCode();
+                }
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.Write("Success");
-                    }
-                    else
-                    {
-                        Console.Write("Error");
-                    }
+                else
+                {
+                    Response.Write("<script>alert('A name is required to add employees.');</script>");
                 }
             }
         }
@@ -82,10 +78,10 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (employeeID.Text.Length > 0)
+                if (employeeID.Text.Trim().Length > 0)
                 {
                     //HTTP GET call by Employee ID
-                    string apiURL = "http://localhost:5000/employees/" + employeeID.Text;
+                    string apiURL = "http://localhost:5000/employees/" + employeeID.Text.Trim();
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
 
@@ -122,7 +118,7 @@ namespace foundry_assessment
                     // Filter by employee name in the text box
                     foreach (Employee e in data.ToList())
                     {
-                        if (e.name != employeeName.Text)
+                        if (e.name != employeeName.Text.Trim())
                         {
                             data.Remove(e);
                         }
@@ -150,8 +146,8 @@ namespace foundry_assessment
 
         protected async Task EditEmployee(GridViewRow r)
         {
-            string name = (r.FindControl("txtEmployeeName") as TextBox).Text;
-            string id = (r.FindControl("txtEmployeeID") as TextBox).Text;
+            string name = (r.FindControl("txtEmployeeName") as TextBox).Text.Trim();
+            string id = (r.FindControl("txtEmployeeID") as TextBox).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -166,15 +162,6 @@ namespace foundry_assessment
                     string apiURL = "http://localhost:5000/employees/" + id;
                     HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
                     response.EnsureSuccessStatusCode();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.Write("Success");
-                    }
-                    else
-                    {
-                        Console.Write("Error");
-                    }
                 }
             }
         }
@@ -194,7 +181,7 @@ namespace foundry_assessment
 
         protected async Task DeleteEmployee(GridViewRow r)
         {
-            string id = (r.FindControl("lblEmployeeID") as Label).Text;
+            string id = (r.FindControl("lblEmployeeID") as Label).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -202,15 +189,6 @@ namespace foundry_assessment
                 string apiURL = "http://localhost:5000/employees/" + id;
                 var response = await client.DeleteAsync(apiURL);
                 response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.Write("Success");
-                }
-                else
-                {
-                    Console.Write("Error");
-                }
             }
         }
 
@@ -228,7 +206,7 @@ namespace foundry_assessment
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = gvEmployees.Rows[rowIndex];
-                string id = (row.FindControl("lblEmployeeID") as Label).Text;
+                string id = (row.FindControl("lblEmployeeID") as Label).Text.Trim();
                 Session["employeeID"] = id;
                 Response.Redirect("Engagements.aspx");
             }

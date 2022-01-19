@@ -34,8 +34,6 @@ namespace foundry_assessment
 
                     gvClients.DataSource = data;
                     gvClients.DataBind();
-
-                    //Response.Write("<script>alert('Data loaded successfully');</script>");
                 }
             }
         }
@@ -51,25 +49,21 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (clientName.Text.Length > 0)
+                if (clientName.Text.Trim().Length > 0)
                 {
                     // Create client object to POST to backend
-                    Client businessClient = new Client { name = clientName.Text };
+                    Client businessClient = new Client { name = clientName.Text.Trim() };
                     var jsonInput = JsonConvert.SerializeObject(businessClient);
                     var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
 
                     // HTTP POST call
                     HttpResponseMessage response = await client.PostAsync("http://localhost:5000/clients", requestContent);
                     response.EnsureSuccessStatusCode();
+                }
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.Write("Success");
-                    }
-                    else
-                    {
-                        Console.Write("Error");
-                    }
+                else
+                {
+                    Response.Write("<script>alert('A name is required to add clients.');</script>");
                 }
             }
         }
@@ -83,10 +77,10 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (clientID.Text.Length > 0)
+                if (clientID.Text.Trim().Length > 0)
                 {
                     //HTTP GET call by Client ID
-                    string apiURL = "http://localhost:5000/clients/" + clientID.Text;
+                    string apiURL = "http://localhost:5000/clients/" + clientID.Text.Trim();
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
 
@@ -123,7 +117,7 @@ namespace foundry_assessment
                     // Filter by client name in the text box
                     foreach (Client c in data.ToList())
                     {
-                        if (c.name != clientName.Text)
+                        if (c.name != clientName.Text.Trim())
                         {
                             data.Remove(c);
                         }
@@ -151,8 +145,8 @@ namespace foundry_assessment
 
         protected async Task EditClient(GridViewRow r)
         {
-            string name = (r.FindControl("txtClientName") as TextBox).Text;
-            string id = (r.FindControl("txtClientID") as TextBox).Text;
+            string name = (r.FindControl("txtClientName") as TextBox).Text.Trim();
+            string id = (r.FindControl("txtClientID") as TextBox).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -167,15 +161,6 @@ namespace foundry_assessment
                     string apiURL = "http://localhost:5000/clients/" + id;
                     HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
                     response.EnsureSuccessStatusCode();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.Write("Success");
-                    }
-                    else
-                    {
-                        Console.Write("Error");
-                    }
                 }
             }
         }
@@ -195,7 +180,7 @@ namespace foundry_assessment
 
         protected async Task DeleteClient(GridViewRow r)
         {
-            string id = (r.FindControl("lblClientID") as Label).Text;
+            string id = (r.FindControl("lblClientID") as Label).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -204,14 +189,6 @@ namespace foundry_assessment
                 var response = await client.DeleteAsync(apiURL);
                 response.EnsureSuccessStatusCode();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.Write("Success");
-                }
-                else
-                {
-                    Console.Write("Error");
-                }
             }
         }
 
@@ -229,7 +206,7 @@ namespace foundry_assessment
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = gvClients.Rows[rowIndex];
-                string id = (row.FindControl("lblClientID") as Label).Text;
+                string id = (row.FindControl("lblClientID") as Label).Text.Trim();
                 Session["clientID"] = id;
                 Response.Redirect("Engagements.aspx");
             }

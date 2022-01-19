@@ -65,13 +65,13 @@ namespace foundry_assessment
         protected async Task InsertEngagementAsync()
         {
             using (var client = new HttpClient()) {
-                if (engagementNameAdd.Text.Length > 0 && clientIDAdd.Text.Length > 0 && employeeIDAdd.Text.Length > 0)
+                if (engagementNameAdd.Text.Trim().Length > 0 && clientIDAdd.Text.Trim().Length > 0 && employeeIDAdd.Text.Trim().Length > 0)
                 {
                     bool employeeExists = false;
                     bool clientExists = false;
                     
                     // Check if employee exists
-                    string apiURLEmployee = "http://localhost:5000/employees/" + employeeIDAdd.Text;
+                    string apiURLEmployee = "http://localhost:5000/employees/" + employeeIDAdd.Text.Trim();
                     HttpResponseMessage responseEmployee = await client.GetAsync(apiURLEmployee);
                     responseEmployee.EnsureSuccessStatusCode();
 
@@ -84,7 +84,7 @@ namespace foundry_assessment
                     }
 
                     // Check if client exists
-                    string apiURLClient = "http://localhost:5000/clients/" + clientIDAdd.Text;
+                    string apiURLClient = "http://localhost:5000/clients/" + clientIDAdd.Text.Trim();
                     HttpResponseMessage responseClient = await client.GetAsync(apiURLClient);
                     responseClient.EnsureSuccessStatusCode();
 
@@ -99,22 +99,13 @@ namespace foundry_assessment
                     if (employeeExists && clientExists)
                     {
                         // Create engagement object to POST into the backend
-                        Engagement engagement = new Engagement { name = engagementNameAdd.Text, client = clientIDAdd.Text, employee = employeeIDAdd.Text, description = engagementDescriptionAdd.Text };
+                        Engagement engagement = new Engagement { name = engagementNameAdd.Text.Trim(), client = clientIDAdd.Text.Trim(), employee = employeeIDAdd.Text.Trim(), description = engagementDescriptionAdd.Text.Trim() };
                         var jsonInput = JsonConvert.SerializeObject(engagement);
                         var requestContent = new StringContent(jsonInput, Encoding.UTF8, "application/json");
 
                         // HTTP POST call
                         HttpResponseMessage response = await client.PostAsync("http://localhost:5000/engagements", requestContent);
                         response.EnsureSuccessStatusCode();
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            Console.Write("Success");
-                        }
-                        else
-                        {
-                            Console.Write("Error");
-                        }
                     }
 
                     else if (!employeeExists)
@@ -126,6 +117,11 @@ namespace foundry_assessment
                     {
                         Response.Write("<script>alert('Client does not exist.');</script>");
                     }
+                }
+
+                else
+                {
+                    Response.Write("<script>alert('All fields require an input to add engagements.');</script>");
                 }
             }
         }
@@ -139,10 +135,10 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (engagementIDSearch.Text.Length > 0)
+                if (engagementIDSearch.Text.Trim().Length > 0)
                 {
                     //HTTP GET call by Engagement ID
-                    string apiURL = "http://localhost:5000/engagements/" + engagementIDSearch.Text;
+                    string apiURL = "http://localhost:5000/engagements/" + engagementIDSearch.Text.Trim();
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
 
@@ -179,25 +175,31 @@ namespace foundry_assessment
                     // Filter by the input textboxes used for searching the engagement
                     foreach (Engagement engagement in data.ToList())
                     {
-                        if (engagementNameAdd.Text.Length > 0 && engagement.name != engagementNameAdd.Text)
+                        if (engagementNameAdd.Text.Trim().Length > 0 && engagement.name != engagementNameAdd.Text.Trim())
                         {
                             data.Remove(engagement);
                             continue;
                         }
 
-                        if (clientIDAdd.Text.Length > 0 && engagement.client != clientIDAdd.Text)
+                        if (clientIDAdd.Text.Trim().Length > 0 && engagement.client != clientIDAdd.Text.Trim())
                         {
                             data.Remove(engagement);
                             continue;
                         }
 
-                        if (employeeIDAdd.Text.Length > 0 && engagement.employee != employeeIDAdd.Text)
+                        if (employeeIDAdd.Text.Trim().Length > 0 && engagement.employee != employeeIDAdd.Text.Trim())
                         {
                             data.Remove(engagement);
                             continue;
                         }
 
-                        if (engagementDescriptionAdd.Text.Length > 0 && engagement.description != engagementDescriptionAdd.Text)
+/*                        if (!String.IsNullOrWhiteSpace(engagementDescriptionAdd.Text) || !String.IsNullOrEmpty(engagementDescriptionAdd.Text))
+                        {
+                            data.Remove(engagement);
+                            continue;
+                        }*/
+
+                        if (engagementDescriptionAdd.Text.Trim().Length > 0 && engagement.description != engagementDescriptionAdd.Text.Trim())
                         {
                             data.Remove(engagement);
                         }
@@ -230,22 +232,22 @@ namespace foundry_assessment
                     // Filter by the input date textboxes used for searching the engagement
                     foreach (Engagement engagement in data.ToList())
                     {
-                        if (startDateSearch.Text.Length > 0)
+                        if (startDateSearch.Text.Trim().Length > 0)
                         {
                             string engagementStartDate = engagement.started.ToString();
 
-                            if (!(engagementStartDate.Equals(startDateSearch.Text)))
+                            if (!(engagementStartDate.Equals(startDateSearch.Text.Trim())))
                             {
                                 data.Remove(engagement);
                                 continue;
                             }
                         }
 
-                        if (endDateSearch.Text.Length > 0)
+                        if (endDateSearch.Text.Trim().Length > 0)
                         {
                             string engagementEndDate = engagement.ended.ToString();
 
-                            if (!(engagementEndDate.Equals(endDateSearch.Text)))
+                            if (!(engagementEndDate.Equals(endDateSearch.Text.Trim())))
                             {
                                 data.Remove(engagement);
                                 continue;
@@ -275,9 +277,9 @@ namespace foundry_assessment
 
         protected async Task EditEngagement(GridViewRow r)
         {
-            string name = (r.FindControl("txtEngagementName") as TextBox).Text;
-            string description = (r.FindControl("txtEngagementDescription") as TextBox).Text;
-            string id = (r.FindControl("txtEngagementID") as TextBox).Text;
+            string name = (r.FindControl("txtEngagementName") as TextBox).Text.Trim();
+            string description = (r.FindControl("txtEngagementDescription") as TextBox).Text.Trim();
+            string id = (r.FindControl("txtEngagementID") as TextBox).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -292,15 +294,6 @@ namespace foundry_assessment
                     string apiURL = "http://localhost:5000/engagements/" + id;
                     HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
                     response.EnsureSuccessStatusCode();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.Write("Success");
-                    }
-                    else
-                    {
-                        Console.Write("Error");
-                    }
                 }
             }
         }
@@ -324,7 +317,7 @@ namespace foundry_assessment
 
         protected async Task EndDateEngagementAsync(GridViewRow r)
         {
-            string id = (r.FindControl("lblEngagementID") as Label).Text;
+            string id = (r.FindControl("lblEngagementID") as Label).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -337,15 +330,6 @@ namespace foundry_assessment
                 string apiURL = "http://localhost:5000/engagements/" + id + "/end";
                 HttpResponseMessage response = await client.PutAsync(apiURL, requestContent);
                 response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.Write("Success");
-                }
-                else
-                {
-                    Console.Write("Error");
-                }
             }
         }
 
@@ -358,7 +342,7 @@ namespace foundry_assessment
 
         protected async Task DeleteEngagement(GridViewRow r)
         {
-            string id = (r.FindControl("lblEngagementID") as Label).Text;
+            string id = (r.FindControl("lblEngagementID") as Label).Text.Trim();
 
             using (var client = new HttpClient())
             {
@@ -366,15 +350,6 @@ namespace foundry_assessment
                 string apiURL = "http://localhost:5000/engagements/" + id;
                 var response = await client.DeleteAsync(apiURL);
                 response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.Write("Success");
-                }
-                else
-                {
-                    Console.Write("Error");
-                }
             }
         }
 
@@ -383,8 +358,8 @@ namespace foundry_assessment
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvEngagements.EditIndex)
             {
                 // Style engagements by current or end-dated
-                string startDateString = ((e.Row).FindControl("lblStartDate") as Label).Text;
-                string endDateString = ((e.Row).FindControl("lblEndDate") as Label).Text;
+                string startDateString = ((e.Row).FindControl("lblStartDate") as Label).Text.Trim();
+                string endDateString = ((e.Row).FindControl("lblEndDate") as Label).Text.Trim();
                 DateTime startDate = DateTime.Parse(startDateString);
                 DateTime endDate = DateTime.Parse(endDateString);
                 DateTime currentDate = DateTime.Now;
@@ -408,10 +383,10 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (employeeIDAdd.Text.Length > 0)
+                if (employeeIDAdd.Text.Trim().Length > 0)
                 {
                     //HTTP GET call by Employee ID
-                    string apiURL = "http://localhost:5000/employees/" + employeeIDAdd.Text + "/engagements";
+                    string apiURL = "http://localhost:5000/employees/" + employeeIDAdd.Text.Trim() + "/engagements";
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
 
@@ -431,10 +406,10 @@ namespace foundry_assessment
         {
             using (var client = new HttpClient())
             {
-                if (clientIDAdd.Text.Length > 0)
+                if (clientIDAdd.Text.Trim().Length > 0)
                 {
                     //HTTP GET call by Client ID
-                    string apiURL = "http://localhost:5000/clients/" + clientIDAdd.Text + "/engagements";
+                    string apiURL = "http://localhost:5000/clients/" + clientIDAdd.Text.Trim() + "/engagements";
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
 
