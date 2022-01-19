@@ -193,12 +193,6 @@ namespace foundry_assessment
                             continue;
                         }
 
-/*                        if (!String.IsNullOrWhiteSpace(engagementDescriptionAdd.Text) || !String.IsNullOrEmpty(engagementDescriptionAdd.Text))
-                        {
-                            data.Remove(engagement);
-                            continue;
-                        }*/
-
                         if (engagementDescriptionAdd.Text.Trim().Length > 0 && engagement.description != engagementDescriptionAdd.Text.Trim())
                         {
                             data.Remove(engagement);
