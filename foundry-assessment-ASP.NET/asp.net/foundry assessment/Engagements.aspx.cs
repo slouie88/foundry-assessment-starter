@@ -34,7 +34,6 @@ namespace foundry_assessment
             {
                 RegisterAsyncTask(new PageAsyncTask(RunAsyncGetDataFromSource));
             }
-
         }
 
         protected async Task RunAsyncGetDataFromSource()
@@ -354,18 +353,23 @@ namespace foundry_assessment
                 // Style engagements by current or end-dated
                 string startDateString = ((e.Row).FindControl("lblStartDate") as Label).Text.Trim();
                 string endDateString = ((e.Row).FindControl("lblEndDate") as Label).Text.Trim();
-                DateTime startDate = DateTime.Parse(startDateString);
-                DateTime endDate = DateTime.Parse(endDateString);
-                DateTime currentDate = DateTime.Now;
-
-                if ((startDate <= currentDate && currentDate <= endDate) || (startDate <= currentDate && endDateString.Equals("1/01/0001 12:00:00 AM"))) 
+                DateTime startDate;
+                DateTime endDate;
+                if (DateTime.TryParse(startDateString, out startDate) && DateTime.TryParse(endDateString, out endDate))
                 {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccffdd");
-                }
+                    startDate = DateTime.Parse(startDateString);
+                    endDate = DateTime.Parse(endDateString);
+                    DateTime currentDate = DateTime.Now;
+                    
+                    if ((startDate <= currentDate && currentDate <= endDate) || (startDate <= currentDate && endDateString.Equals("1/01/0001 12:00:00 AM")))
+                    {
+                        e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ccffdd");
+                    }
 
-                else
-                {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ffcc66");
+                    else
+                    {
+                        e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ffcc66");
+                    }
                 }
 
                 // Confirmation to delete an engagement
@@ -379,7 +383,7 @@ namespace foundry_assessment
             {
                 if (employeeIDAdd.Text.Trim().Length > 0)
                 {
-                    //HTTP GET call by Employee ID
+                    // HTTP GET call by Employee ID
                     string apiURL = "http://localhost:5000/employees/" + employeeIDAdd.Text.Trim() + "/engagements";
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
@@ -402,7 +406,7 @@ namespace foundry_assessment
             {
                 if (clientIDAdd.Text.Trim().Length > 0)
                 {
-                    //HTTP GET call by Client ID
+                    // HTTP GET call by Client ID
                     string apiURL = "http://localhost:5000/clients/" + clientIDAdd.Text.Trim() + "/engagements";
                     HttpResponseMessage response = await client.GetAsync(apiURL);
                     response.EnsureSuccessStatusCode();
